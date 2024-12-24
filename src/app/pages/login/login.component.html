@@ -1,0 +1,39 @@
+<div class="flex justify-center mt-10">
+    <div class="w-full max-w-sm p-4 bg-white border border-gray-300 rounded-md shadow">
+        <h3 class="text-xl font-medium text-gray-900 text-center mb-5">
+            Iniciar sesión
+        </h3>
+        <form [formGroup]="initialForm" (ngSubmit)="handleSubmit($event)" class="space-y-6">
+            <div>
+                <app-input type="username" placeholder="Username" formControlName="username" />
+                @if (initialForm.get('username')?.errors && initialForm.get('username')?.touched) {
+                <p class="mt-2 text-xs text-red-600 font-medium">
+                    {{ initialForm.get('username')?.errors | validationErrorInputPipe}}
+                </p>
+                }
+            </div>
+            <div>
+                <app-input type="password" placeholder="Contraseña" formControlName="password" />
+                @if (initialForm.get('password')?.errors && initialForm.get('password')?.touched) {
+                <p class="mt-2 text-xs text-red-600 font-medium">
+                    {{ initialForm.get('password')?.errors | validationErrorInputPipe}}
+                </p>
+                }
+            </div>
+            <div>
+                <button type="submit" [disabled]="disabledButton || !initialForm.valid"
+                    class="w-full text-white bg-pink-700 hover:bg-pink-800 focus:ring-4 focus:outline-none focus:ring-pink-300 font-medium rounded-md text-sm px-5 py-2.5 text-center disabled:bg-pink-500">
+                    @if (loading) {
+                    Cargando ...
+                    } @else {
+                    Iniciar sesión
+                    }
+                </button>
+            </div>
+            <div class="text-sm font-medium text-gray-500">
+                ¿Aún no tienes una cuenta? <a routerLink="/register" class="text-pink-700 hover:underline">Crea tu
+                    cuenta</a>
+            </div>
+        </form>
+    </div>
+</div>

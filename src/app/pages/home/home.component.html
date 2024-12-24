@@ -1,0 +1,15 @@
+<div class="bg-gray-200">
+    <div class="fixed top-0 left-0 z-40">
+        <app-sidebar />
+    </div>
+    <div class="fixed top-0 z-40 left-16 xl:left-60 right-0 ">
+        <div class="bg-gray-200 flex justify-center">
+            <app-search-suggestions />
+        </div>
+    </div>
+    <div class="ml-16 xl:ml-60 ">
+        <div class="p-4 mt-10">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

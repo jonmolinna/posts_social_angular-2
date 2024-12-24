@@ -1,0 +1,42 @@
+<aside class="w-16 xl:w-60 h-screen">
+    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-200 border-e border-gray-300">
+        <ul class="space-y-2 font-medium mt-10">
+            <li>
+                <a routerLink="/home" routerLinkActive="active" #home="routerLinkActive"
+                    class=" flex items-center p-2 text-gray-900 rounded-md hover:bg-gray-300 cursor-pointer">
+                    @if (home.isActive) {
+                    <app-home-solid-icon />
+                    }
+                    @else {
+                    <app-home-icon />
+                    }
+                    <span class="hidden xl:block ms-3">Inicio</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/upload" class="flex items-center p-2 text-gray-900 rounded-md hover:bg-gray-300">
+                    <app-plus-icon />
+                    <span class="hidden xl:block ms-3">Crear</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/profile" routerLinkActive="active" #profile="routerLinkActive"
+                    class="flex items-center p-2 text-gray-900 rounded-md hover:bg-gray-300">
+                    @if (profile.isActive) {
+                    <app-user-circle-solid-icon />
+                    } @else {
+                    <app-user-circle-icon />
+                    }
+                    <span class="hidden xl:block ms-3">Perfil</span>
+                </a>
+            </li>
+            <li>
+                <span (click)="logout()"
+                    class="flex items-center p-2 text-gray-900 rounded-md hover:bg-gray-300 cursor-pointer">
+                    <app-arrow-right-start-on-rectangle-icon />
+                    <span class="hidden xl:block ms-3">Salir</span>
+                </span>
+            </li>
+        </ul>
+    </div>
+</aside>
