@@ -6,6 +6,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { FeedComponent } from './pages/home/feed/feed.component';
 import { UploadComponent } from './pages/home/upload/upload.component';
 import { ProfileComponent } from './pages/home/profile/profile.component';
+import { PostComponent } from './pages/home/post/post.component';
 
 export const routes: Routes = [
   {
@@ -27,8 +28,13 @@ export const routes: Routes = [
         component: UploadComponent,
       },
       {
-        path: 'profile',
+        path: 'profile/:username',
         component: ProfileComponent,
+      },
+      {
+        path: 'p/:id',
+        canActivate: [AuthGuard],
+        component: PostComponent,
       },
     ],
   },

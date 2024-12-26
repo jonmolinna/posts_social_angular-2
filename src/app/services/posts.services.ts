@@ -3,6 +3,7 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { environment } from '../../environments/environments';
 import { postInterface } from '../interface/post.interface';
 import { likeInterface } from '../interface/like.interface';
+import { bookMarkInterface } from '../interface/bookMark.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ export class PostService {
     this.http.get<postInterface[]>(`${this.url}/posts/posts`).subscribe({
       next: (posts: postInterface[]) => {
         this.loading.set(false);
+        console.log('---------------->', posts);
         this.posts.set(posts);
       },
       error: (error: HttpErrorResponse) => {
@@ -46,6 +48,29 @@ export class PostService {
                       like.post === payload.post && like.user !== payload.user
                   )
                 : [...post.likes, payload],
+            }
+          : post
+      )
+    );
+  }
+
+  handleAddOrDeleteBookMark(payload: bookMarkInterface) {
+    this.posts.update((posts) =>
+      posts.map((post) =>
+        post._id === payload.post
+          ? {
+              ...post,
+              bookMarks: post.bookMarks.find(
+                (bookMark) =>
+                  bookMark.post === payload.post &&
+                  bookMark.user === payload.user
+              )
+                ? post.bookMarks.filter(
+                    (bookMark) =>
+                      bookMark.post === payload.post &&
+                      bookMark.user !== payload.user
+                  )
+                : [...post.bookMarks, payload],
             }
           : post
       )

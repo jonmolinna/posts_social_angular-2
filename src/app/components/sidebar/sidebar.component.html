@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li>
-                <a routerLink="/profile" routerLinkActive="active" #profile="routerLinkActive"
+                <a [routerLink]="['/profile',]" routerLinkActive="active" #profile="routerLinkActive"
                     class="flex items-center p-2 text-gray-900 rounded-md hover:bg-gray-300">
                     @if (profile.isActive) {
                     <app-user-circle-solid-icon />
