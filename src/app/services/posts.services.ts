@@ -4,6 +4,8 @@ import { environment } from '../../environments/environments';
 import { postInterface } from '../interface/post.interface';
 import { likeInterface } from '../interface/like.interface';
 import { bookMarkInterface } from '../interface/bookMark.interface';
+import { commentInterface } from '../interface/comment.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -31,6 +33,10 @@ export class PostService {
         console.log('------------------->', error);
       },
     });
+  }
+
+  handleAddPost(formData: FormData): Observable<postInterface> {
+    return this.http.post<postInterface>(`${this.url}/posts/upload`, formData);
   }
 
   handleAddOrDeleteLike(payload: likeInterface) {
@@ -72,6 +78,16 @@ export class PostService {
                   )
                 : [...post.bookMarks, payload],
             }
+          : post
+      )
+    );
+  }
+
+  handleAddComment(payload: commentInterface) {
+    this.posts.update((posts) =>
+      posts.map((post) =>
+        post._id === payload.post
+          ? { ...post, comments: [...post.comments, payload] }
           : post
       )
     );

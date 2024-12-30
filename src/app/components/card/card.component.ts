@@ -17,11 +17,26 @@ import { PostService } from '../../services/posts.services';
 import { RouterModule } from '@angular/router';
 import { BookMarkService } from '../../services/bookMark.service';
 import { bookMarkInterface } from '../../interface/bookMark.interface';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { CommentService } from '../../services/comment.service';
+import { provideProtractorTestingSupport } from '@angular/platform-browser';
+import { commentInterface } from '../../interface/comment.interface';
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [IconsModule, LetterUppercasePipe, DateLocalePipe, RouterModule],
+  imports: [
+    IconsModule,
+    LetterUppercasePipe,
+    DateLocalePipe,
+    RouterModule,
+    ReactiveFormsModule,
+  ],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './card.component.html',
 })
@@ -31,6 +46,14 @@ export class CardComponent {
   private likeService = inject(LikeService);
   private postService = inject(PostService);
   private bookMarkService = inject(BookMarkService);
+  private commentService = inject(CommentService);
+  initialForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder) {
+    this.initialForm = this.formBuilder.group({
+      comment: ['', [Validators.required, Validators.minLength(5)]],
+    });
+  }
 
   isLiked = computed(() =>
     this.userService.profile() &&
@@ -87,5 +110,20 @@ export class CardComponent {
         console.log('---------------->', error);
       },
     });
+  }
+
+  async handleComment(event: Event, id: string) {
+    event.preventDefault();
+    const form = this.initialForm.value;
+
+    this.commentService.addCommentToPost(id, form).subscribe({
+      next: (data: commentInterface) => {
+        this.postService.handleAddComment(data);
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log('--------------->', error);
+      },
+    });
+    this.initialForm.reset();
   }
 }

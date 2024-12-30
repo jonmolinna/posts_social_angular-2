@@ -46,10 +46,10 @@
             Ver los {{ quantityComment() }} comentarios
         </a>
         }
-        <form action="" class="mt-1">
-            <input type="text" placeholder="Agrega un comentario..."
+        <form [formGroup]="initialForm" (ngSubmit)="handleComment($event, post()._id)" class="mt-1">
+            <input type="text" formControlName="comment" placeholder="Agrega un comentario (min 5 carácteres)"
                 class="w-full py-1 px-2 outline-none text-gray-700 font-normal text-sm">
-            <button class="hidden">Send</button>
+            <button [disabled]="!initialForm.valid" class="hidden">Send</button>
         </form>
     </div>
 </div>
