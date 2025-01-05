@@ -7,6 +7,9 @@ import { FeedComponent } from './pages/home/feed/feed.component';
 import { UploadComponent } from './pages/home/upload/upload.component';
 import { ProfileComponent } from './pages/home/profile/profile.component';
 import { PostComponent } from './pages/home/post/post.component';
+import { PostsComponent } from './pages/home/profile/posts/posts.component';
+import { LikesComponent } from './pages/home/profile/likes/likes.component';
+import { SavedComponent } from './pages/home/profile/saved/saved.component';
 
 export const routes: Routes = [
   {
@@ -30,10 +33,28 @@ export const routes: Routes = [
       {
         path: 'profile/:username',
         component: ProfileComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: '',
+            pathMatch: 'full',
+          },
+          {
+            path: '',
+            component: PostsComponent,
+          },
+          {
+            path: 'likes',
+            component: LikesComponent,
+          },
+          {
+            path: 'saved',
+            component: SavedComponent,
+          },
+        ],
       },
       {
         path: 'p/:id',
-        canActivate: [AuthGuard],
         component: PostComponent,
       },
     ],

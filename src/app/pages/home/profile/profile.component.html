@@ -1,13 +1,28 @@
-<div class="pt-20">
-    <div>
-        <p className='text-center text-2xl text-gray-900 font-normal'>
-            Kendra Contreras
+<div class="mt-7 max-w-5xl mx-auto min-h-screen">
+    <article class="">
+        <p class="text-center text-lg text-pink-700 font-medium">
+            {{ user()?.name | LetterUppercasePipe }}
         </p>
-        <small className='block text-center text-gray-700 font-light'>
-            kcontreras
-        </small>
-    </div>
-    <div>
-
-    </div>
+        <span class="block text-center text-sm text-gray-500 font-normal">
+            {{ user()?.username}}
+        </span>
+    </article>
+    <article class="flex items-center justify-around mt-3">
+        <div class="font-bold text-sm text-gray-500 flex flex-col items-center">
+            <span>publicaciones</span>
+            <span>{{ quantityPostsByUser() }} </span>
+        </div>
+        <div class="font-bold text-sm text-gray-500 flex flex-col items-center">
+            <span>me gusta</span>
+            <span>{{ quantityLikesByPosts() }}</span>
+        </div>
+        <div class="font-bold text-sm text-gray-500 flex flex-col items-center">
+            <span>guardados</span>
+            <span>{{ quantityBookMarkPosts() }}</span>
+        </div>
+    </article>
+    <article>
+        <app-tabs />
+    </article>
+    <router-outlet />
 </div>

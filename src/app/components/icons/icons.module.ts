@@ -17,6 +17,7 @@ import { HeartIconComponent } from './heart-icon/heart-icon.component';
 import { ChatBubbleAvalIconComponent } from './chat-bubble-aval-icon/chat-bubble-aval-icon.component';
 import { PaperAirplaneIconComponent } from './paper-airplane-icon/paper-airplane-icon.component';
 import { BookmarkIconComponent } from './bookmark-icon/bookmark-icon.component';
+import { SquaresIconComponent } from './squares-icon/squares-icon.component';
 
 @NgModule({
   declarations: [],
@@ -39,6 +40,7 @@ import { BookmarkIconComponent } from './bookmark-icon/bookmark-icon.component';
     ChatBubbleAvalIconComponent,
     PaperAirplaneIconComponent,
     BookmarkIconComponent,
+    SquaresIconComponent,
   ],
   exports: [
     HomeIconComponent,
@@ -58,6 +60,7 @@ import { BookmarkIconComponent } from './bookmark-icon/bookmark-icon.component';
     ChatBubbleAvalIconComponent,
     PaperAirplaneIconComponent,
     BookmarkIconComponent,
+    SquaresIconComponent,
   ],
 })
 export class IconsModule {}

@@ -24,7 +24,6 @@ import {
   Validators,
 } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
-import { provideProtractorTestingSupport } from '@angular/platform-browser';
 import { commentInterface } from '../../interface/comment.interface';
 
 @Component({
