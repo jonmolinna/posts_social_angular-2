@@ -1,14 +1,32 @@
 <article class="p-2 mt-7 flex items-center justify-around border border-b-2 border-b-gray-300">
-    <a routerLink="./" class="flex items-center space-x-2 text-gray-600">
+    <a routerLink="./" routerLinkActive="active" #posts="routerLinkActive" [routerLinkActiveOptions]="{exact: true}"
+        class="flex items-center space-x-2 text-gray-600">
+        @if (posts.isActive) {
+        <app-squares-solid-icon />
+        }
+        @else {
         <app-squares-icon />
+        }
         <span class="block">Publicaciones</span>
     </a>
-    <a routerLink="likes" class="flex items-center space-x-2 text-gray-600">
+    <a routerLink="likes" routerLinkActive="active" #liked="routerLinkActive"
+        class="flex items-center space-x-2 text-gray-600">
+        @if (liked.isActive) {
+        <app-heart-solid-icon class="text-gray-600" />
+        }
+        @else {
         <app-heart-icon />
+        }
         <span class="block">Me gusta</span>
     </a>
-    <a routerLink="saved" class="flex items-center space-x-2 text-gray-600">
+    <a routerLink="saved" routerLinkActive="active" #saved="routerLinkActive"
+        class="flex items-center space-x-2 text-gray-600">
+        @if (saved.isActive) {
+        <app-bookmark-solid-icon class="text-gray-600" />
+        }
+        @else {
         <app-bookmark-icon />
+        }
         <span class="block">Guardados</span>
     </a>
 </article>
