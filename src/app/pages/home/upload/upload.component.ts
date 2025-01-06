@@ -46,6 +46,7 @@ export class UploadComponent {
         this.image.reset();
         this.imageSrc = '';
         this.imageFile = '';
+        this.postService.addPost(data);
       },
       error: (error: HttpErrorResponse) => {
         this.loading.set(false);

@@ -1,1 +1,16 @@
-<p>likes works!</p>
+<div class="mt-2">
+    @if (likesByUser()?.length) {
+    <div class="grid grid-cols-3 gap-1">
+        @for (post of likesByUser(); track post._id) {
+        <a [routerLink]="['/p', post._id]">
+            <img src={{post.imagen_url}} alt={{post.user.username}} class="h-40 w-full object-cover object-center">
+        </a>
+        }
+    </div>
+    }
+    @else {
+    <p class="text-lg text-center text-gray-900 mt-2">
+        Aún no hay Likes
+    </p>
+    }
+</div>

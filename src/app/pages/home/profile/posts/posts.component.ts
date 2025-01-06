@@ -1,4 +1,10 @@
-import { Component, computed, inject, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  WritableSignal,
+} from '@angular/core';
 import { PostService } from '../../../../services/posts.services';
 import { UserService } from '../../../../services/users.services';
 import { userInterface } from '../../../../interface/user.interface';
@@ -8,6 +14,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-posts',
   standalone: true,
   imports: [RouterModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './posts.component.html',
 })
 export class PostsComponent {

@@ -39,6 +39,10 @@ export class PostService {
     return this.http.post<postInterface>(`${this.url}/posts/upload`, formData);
   }
 
+  addPost(post: postInterface) {
+    this.posts.update((posts) => [post, ...posts]);
+  }
+
   handleAddOrDeleteLike(payload: likeInterface) {
     this.posts.update((posts) =>
       posts.map((post) =>
