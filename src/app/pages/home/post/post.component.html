@@ -1,1 +1,93 @@
-<p>Post Works</p>
+<div class="min-h-screen">
+    <div class="max-w-lg mx-auto bg-white border border-gray-200 rounded-lg shadow mt-4">
+        <div class="flex justify-between px-3 py-2 items-center">
+            <div class="flex flex-col">
+                <a [routerLink]="['/profile', post()?.user?.username]" class="text-base font-medium text-gray-500">
+                    {{post()?.user?.name | LetterUppercasePipe }}
+                </a>
+                <span class="text-xs text-gray-600">{{post()?.user?.username}}</span>
+            </div>
+            <div class="relative">
+                <button
+                    class="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg text-sm p-1.5"
+                    type="button" (click)="toggleClasses()">
+                    <app-ellipsis-horizontal-icon />
+                </button>
+                <div [ngClass]="{'hidden': hidden()}"
+                    class="z-40 absolute top-12 -right-3 text-base list-none bg-gray-50 divide-y divide-gray-100 rounded-lg shadow w-44">
+                    <ul class="py-2">
+                        <li>
+                            <button (click)="handleDeletePost(post()?._id)"
+                                class="w-full px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                Eliminar
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <img src={{post()?.imagen_url}} alt="">
+        <div class="flex justify-between px-3 mt-2 items-center">
+            <article class="flex space-x-3">
+                <button (click)="handleAddOrDeleteLike(post()?._id)">
+                    @if (isLiked()) {
+                    <app-heart-solid-icon class="text-red-700" />
+                    }
+                    @else {
+                    <app-heart-icon />
+                    }
+                </button>
+                <button>
+                    <app-chat-bubble-aval-icon class="-rotate-90" />
+                </button>
+                <button>
+                    <app-paper-airplane-icon class="-rotate-45 block" />
+                </button>
+            </article>
+            <button (click)="handleAddOrDeleteBookMark(post()?._id)">
+                @if (isBookMark()) {
+                <app-bookmark-solid-icon />
+                }
+                @else {
+                <app-bookmark-icon />
+                }
+            </button>
+        </div>
+        <div class=" px-3 mt-2">
+            @if (quantityLike() > 0) {
+            <p class="text-sm font-medium text-gray-700">
+                {{quantityLike()}} Me gusta
+            </p>
+            }
+            <p>{{ post()?.comment }}</p>
+        </div>
+        <div class="px-3">
+            @for (comment of post()?.comments; track comment._id) {
+            <aside>
+                <div>
+                    <p class="text-sm text-gray-800">
+                        <span class="font-medium text-gray-900">{{ comment.user.username}}</span>
+                        {{ comment.comment }}
+                    </p>
+                </div>
+                <div class="flex items-center justify-end space-x-5">
+                    <small class="text-gray-500 text-xs">{{ comment.createdAt | DateLocalePipe}}</small>
+                    @if (profileId() === comment.user._id) {
+                    <button (click)="handleDeleteCommentByPostId(post()?._id, comment._id)">
+                        <app-trash-icon class="text-gray-500" />
+                    </button>
+                    }
+                </div>
+            </aside>
+            }
+        </div>
+        <form class="mt-2" [formGroup]="initialForm" (ngSubmit)="handleAddComment($event, post()?._id)">
+            <input type="text" formControlName="comment" placeholder="Agrega un comentario (min 5 carácteres)"
+                class="w-full py-1 px-2 outline-none text-gray-700 font-normal text-sm">
+            <button [disabled]="!initialForm.valid" class="hidden">Send</button>
+        </form>
+        <div class="my-2 mx-3 flex justify-end text-gray-500">
+            <small>{{post()?.createdAt | DateLocalePipe}}</small>
+        </div>
+    </div>
+</div>

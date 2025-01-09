@@ -54,22 +54,20 @@ export class CardComponent {
     });
   }
 
-  isLiked = computed(() =>
-    this.userService.profile() &&
-    this.post().likes.find(
-      (like) => like.user === this.userService.profile()?._id
-    )
-      ? true
-      : false
+  isLiked = computed(
+    () =>
+      this.userService.profile() &&
+      this.post().likes.find(
+        (like) => like.user === this.userService.profile()?._id
+      )
   );
 
-  isBookMark = computed(() =>
-    this.userService.profile() &&
-    this.post().bookMarks.find(
-      (bookMark) => bookMark.user === this.userService.profile()?._id
-    )
-      ? true
-      : false
+  isBookMark = computed(
+    () =>
+      this.userService.profile() &&
+      this.post().bookMarks.find(
+        (bookMark) => bookMark.user === this.userService.profile()?._id
+      )
   );
 
   quantityLike = computed(

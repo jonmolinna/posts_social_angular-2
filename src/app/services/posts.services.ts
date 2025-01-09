@@ -6,6 +6,7 @@ import { likeInterface } from '../interface/like.interface';
 import { bookMarkInterface } from '../interface/bookMark.interface';
 import { commentInterface } from '../interface/comment.interface';
 import { Observable } from 'rxjs';
+import { LikeService } from './like.service';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,10 @@ export class PostService {
 
   handleAddPost(formData: FormData): Observable<postInterface> {
     return this.http.post<postInterface>(`${this.url}/posts/upload`, formData);
+  }
+
+  getOnePostById(id: string): Observable<postInterface> {
+    return this.http.get<postInterface>(`${this.url}/posts/${id}`);
   }
 
   addPost(post: postInterface) {
@@ -92,6 +97,33 @@ export class PostService {
       posts.map((post) =>
         post._id === payload.post
           ? { ...post, comments: [...post.comments, payload] }
+          : post
+      )
+    );
+  }
+
+  handleDeletePostUserById(id: string): Observable<string> {
+    return this.http.delete<string>(`${this.url}/posts/${id}`);
+  }
+
+  deletePostById(payload: string): void {
+    this.posts.update((posts) => posts.filter((post) => post._id !== payload));
+  }
+
+  deleteCommentToPostId(payload: commentInterface): void {
+    this.posts.update((posts) =>
+      posts.map((post) =>
+        post._id === payload.post
+          ? {
+              ...post,
+              comments: post.comments.find(
+                (comment) =>
+                  comment._id === payload._id &&
+                  comment.user._id === payload.user._id
+              )
+                ? post.comments.filter((comment) => comment._id !== payload._id)
+                : post.comments,
+            }
           : post
       )
     );

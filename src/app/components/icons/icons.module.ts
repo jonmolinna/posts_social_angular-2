@@ -19,6 +19,8 @@ import { PaperAirplaneIconComponent } from './paper-airplane-icon/paper-airplane
 import { BookmarkIconComponent } from './bookmark-icon/bookmark-icon.component';
 import { SquaresIconComponent } from './squares-icon/squares-icon.component';
 import { SquaresSolidIconComponent } from './squares-solid-icon/squares-solid-icon.component';
+import { EllipsisHorizontalIconComponent } from './ellipsis-horizontal-icon/ellipsis-horizontal-icon.component';
+import { TrashIconComponent } from './trash-icon/trash-icon.component';
 
 @NgModule({
   declarations: [],
@@ -43,6 +45,8 @@ import { SquaresSolidIconComponent } from './squares-solid-icon/squares-solid-ic
     BookmarkIconComponent,
     SquaresIconComponent,
     SquaresSolidIconComponent,
+    EllipsisHorizontalIconComponent,
+    TrashIconComponent,
   ],
   exports: [
     HomeIconComponent,
@@ -64,6 +68,8 @@ import { SquaresSolidIconComponent } from './squares-solid-icon/squares-solid-ic
     BookmarkIconComponent,
     SquaresIconComponent,
     SquaresSolidIconComponent,
+    EllipsisHorizontalIconComponent,
+    TrashIconComponent,
   ],
 })
 export class IconsModule {}

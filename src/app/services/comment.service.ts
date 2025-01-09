@@ -24,4 +24,13 @@ export class CommentService {
       comment
     );
   }
+
+  deleteComment(
+    idPost: string,
+    idComment: string
+  ): Observable<commentInterface> {
+    return this.http.delete<commentInterface>(
+      `${this.url}/comment/deleteComment/${idPost}/${idComment}`
+    );
+  }
 }
