@@ -12,6 +12,7 @@ export class UserService {
   private http = inject(HttpClient);
   profile: WritableSignal<userInterface | null> = signal(null);
   user: WritableSignal<userInterface | null> = signal(null);
+  users: WritableSignal<userInterface[]> = signal([]);
 
   constructor() {
     this.url = environment.endpoint;
@@ -34,5 +35,16 @@ export class UserService {
 
   getUserByUsername(username: string): Observable<userInterface> {
     return this.http.get<userInterface>(`${this.url}/users/user/${username}`);
+  }
+
+  getAllUsers(): void {
+    this.http.get<userInterface[]>(`${this.url}/users/users`).subscribe({
+      next: (data: userInterface[]) => {
+        this.users.set(data);
+      },
+      error: (error: HttpClient) => {
+        console.log('Error', error);
+      },
+    });
   }
 }

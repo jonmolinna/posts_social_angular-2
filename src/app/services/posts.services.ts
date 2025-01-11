@@ -26,7 +26,6 @@ export class PostService {
     this.http.get<postInterface[]>(`${this.url}/posts/posts`).subscribe({
       next: (posts: postInterface[]) => {
         this.loading.set(false);
-        console.log('---------------->', posts);
         this.posts.set(posts);
       },
       error: (error: HttpErrorResponse) => {

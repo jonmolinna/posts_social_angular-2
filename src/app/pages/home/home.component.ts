@@ -18,5 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getProfile();
     this.postService.getAllPosts();
+    this.userService.getAllUsers();
   }
 }
