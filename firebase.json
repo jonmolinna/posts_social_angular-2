@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/posts_social_angular/browser",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
